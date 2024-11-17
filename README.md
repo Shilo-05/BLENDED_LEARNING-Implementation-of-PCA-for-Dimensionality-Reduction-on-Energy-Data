@@ -1,6 +1,10 @@
 # BLENDED LEARNING
 # Implementation of Principal Component Analysis (PCA) for Dimensionality Reduction on Energy Data
 
+```
+Developed by: Oswald Shilo
+RegisterNumber:  212223040139
+```
 ## AIM:
 To implement Principal Component Analysis (PCA) to reduce the dimensionality of the energy data.
 
@@ -31,10 +35,8 @@ To implement Principal Component Analysis (PCA) to reduce the dimensionality of 
 ```
 /*
 Program to implement Principal Component Analysis (PCA) for dimensionality reduction on the energy data.
-Developed by: Aaron H
-RegisterNumber:  212223040001
-*/
 
+*/
 # Import necessary libraries
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
@@ -75,19 +77,27 @@ print("Total Explained Variance:", sum(explained_variance))
 # Create a DataFrame to store the principal components
 pca_df = pd.DataFrame(X_pca, columns=['PC1', 'PC2'])
 
+# Adding a hue to scatterplot for more insight
+pca_df['Category'] = (pca_df['PC1'] > 0).astype(int)  # Example categorical feature based on PC1
+
+# Define a palette for the scatterplot
+palette = sns.color_palette("husl", 2)  # 2 distinct colors for categories
+
 # Plot the first two principal components
 plt.figure(figsize=(8, 6))
-sns.scatterplot(x='PC1', y='PC2', data=pca_df, alpha=0.7)
+sns.scatterplot(x='PC1', y='PC2', hue='Category', palette=palette, data=pca_df, alpha=0.7, s=100)
 plt.xlabel("Principal Component 1")
 plt.ylabel("Principal Component 2")
-plt.title("PCA - Heights and Weights Dataset")
+plt.title("PCA - Heights and Weights Dataset with Categories")
+plt.legend(title='Category', loc='best')
+plt.grid(True, linestyle='--', alpha=0.5)
 plt.show()
+
 
 ```
 
 ## Output:
-<img width="789" alt="Screenshot 2024-11-14 at 11 45 57 AM" src="https://github.com/user-attachments/assets/3b283016-6521-4789-bd22-73ac4fbaa850">
-
+![image](https://github.com/user-attachments/assets/b47b5cb2-a33f-4434-a7f2-2823989827ea)
 
 ## Result:
 Thus, Principal Component Analysis (PCA) was successfully implemented to reduce the dimensionality of the energy dataset.
